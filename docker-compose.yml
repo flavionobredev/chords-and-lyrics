@@ -12,3 +12,6 @@ services:
     ports:
       - "8000:8000"
       - "24678:24678"
+    environment:
+      PORT: 8000
+      ACCEPTED_HOSTS: ${ACCEPTED_HOSTS}
