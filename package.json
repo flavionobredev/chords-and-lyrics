@@ -1,0 +1,22 @@
+{
+  "name": "chords-and-lyrics",
+  "private": true,
+  "author": "Flávio Nobre <flavionobredev@gmail.com>",
+  "description": "This project want save chords and lyrics by any song in a Notion database, for my personal use in church.",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "nuxt": "^3.4.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1"
+  }
+}
