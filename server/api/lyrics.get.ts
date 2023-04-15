@@ -1,5 +1,7 @@
+import { LetrasMusScrapper } from "~/domain/gateways/letter-scrapper.gateway";
+import { LetrasMusStrategy } from "~/domain/strategies/letras-mus.strategy";
+import { Lyrics } from "~/domain/usecases/lyrics.usecase";
 const acceptedHosts = process.env.ACCEPTED_HOSTS?.split(",") || [];
-
 export default defineEventHandler(async (event) => {
   const { url } = getQuery(event);
   if (!url) {
@@ -21,8 +23,17 @@ export default defineEventHandler(async (event) => {
   }
 
   console.log("event>>>>", urlData.host);
+  const letrasMusStrategy = new Lyrics(
+    new LetrasMusScrapper(fetch),
+    new LetrasMusStrategy()
+  );
+  const result = await letrasMusStrategy.get(urlData.href, {
+    selector: ".cnt-letra",
+  });
+  console.log("result>>>>", result);
   // const data = await fetch(urlData).then((res) => res.text());
   return {
     ok: true,
+    text: result.text,
   };
 });

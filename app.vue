@@ -1,6 +1,7 @@
 <script setup>
 const textAreaRef = ref(null);
 const url = ref("");
+const text = ref("");
 
 onMounted(() => {
   textAreaRef.value.focus();
@@ -19,7 +20,8 @@ const handleSubmit = async () => {
       url: url.value,
     },
   });
-  console.log(data);
+  console.log(data.value);
+  text.value = data.value.text;
 };
 </script>
 
@@ -31,13 +33,18 @@ const handleSubmit = async () => {
         <textarea
           ref="textAreaRef"
           class="p-2 focus:outline-none rounded-md w-1/2 max-w-md"
-          rows="1"
+          rows="2"
           type="text"
           v-model="url"
         />
         <button @click.prevent="handleSubmit" class="btn__submit">
           Processar
         </button>
+
+        <p
+          class="text-center mx-auto text-white max-w-[400px]"
+          v-html="text.replace('\n', '<br>')"
+        />
       </div>
     </div>
   </div>
