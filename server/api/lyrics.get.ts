@@ -27,13 +27,19 @@ export default defineEventHandler(async (event) => {
     new LetrasMusScrapper(fetch),
     new LetrasMusStrategy()
   );
-  const result = await letrasMusStrategy.get(urlData.href, {
-    selector: ".cnt-letra",
-  });
+  const result = await letrasMusStrategy.get<LetrasMusStrategy.GetOutput>(
+    urlData.href,
+    {
+      lyricsSelector: ".cnt-letra",
+    }
+  );
   console.log("result>>>>", result);
   // const data = await fetch(urlData).then((res) => res.text());
   return {
     ok: true,
-    text: result.text,
+    lyricsText: result.text,
+    title: result.title,
+    author: result.author,
+    videoId: result.videoId,
   };
 });

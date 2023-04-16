@@ -1,10 +1,15 @@
 import { Scrapper } from "../gateways/protocol/scrapper.protocol";
 
+export namespace LyricsStrategy {
+  export type GetOutput = {
+    text: string;
+    title: string;
+    author: string;
+  };
+}
+
 export interface LyricsStrategy {
-  get(
-    lyrics: Scrapper.ScrappingOutput,
-    data: unknown
-  ): { text: string } | Promise<{ text: string }>;
+  get(lyrics: Scrapper.ScrappingOutput, data: unknown): unknown;
 }
 
 export class Lyrics {
@@ -13,8 +18,8 @@ export class Lyrics {
     private readonly lyricsStrategy: LyricsStrategy
   ) {}
 
-  async get(url: string, data: unknown) {
+  async get<T = any>(url: string, data: unknown): Promise<T> {
     const lyrics = await this.scrapper.scrap(url);
-    return this.lyricsStrategy.get(lyrics, data);
+    return this.lyricsStrategy.get(lyrics, data) as T;
   }
 }

@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/usr/notion-integration/app
-    entrypoint: sh -c "npm run dev"
+    entrypoint: sh -c "npm i && npm run dev"
     tty: true # for pretty logs
     ports:
       - "8000:8000"

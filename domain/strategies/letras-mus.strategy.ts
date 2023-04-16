@@ -2,15 +2,29 @@ import { LyricsStrategy } from "../usecases/lyrics.usecase";
 import { JSDOM } from "jsdom";
 
 export class LetrasMusStrategy implements LyricsStrategy {
-  get(lyric: { html: JSDOM }, data: LetrasMusStrategy.GetInput) {
-    const { selector } = data;
+  get(
+    lyric: { html: JSDOM },
+    data: LetrasMusStrategy.GetInput
+  ): LetrasMusStrategy.GetOutput {
+    const { lyricsSelector } = data;
     const { html } = lyric;
-    const lyrics = html.window.document.querySelector(selector)?.innerHTML;
+    const lyrics =
+      html.window.document.querySelector(lyricsSelector)?.innerHTML;
+
     if (!lyrics) {
-      throw new Error(`Lyrics not found for selector: ${selector}`);
+      throw new Error(`Lyrics not found for selector: ${lyricsSelector}`);
     }
+
+    const matchInfo = html.window.document.body.innerHTML.match(
+      /ui\/player',([^;]+)\]\)/
+    );
+    const info = matchInfo && JSON.parse(matchInfo[1]);
+
     return {
       text: this.parseLyrics(lyrics),
+      title: info?.["Name"] || "Título Desconhecido",
+      author: info?.["Artist"] || "Artista Desconhecido",
+      videoId: info?.["YoutubeID"],
     };
   }
 
@@ -25,6 +39,13 @@ export class LetrasMusStrategy implements LyricsStrategy {
 
 export namespace LetrasMusStrategy {
   export type GetInput = {
-    selector: string;
+    lyricsSelector: string;
+  };
+
+  export type GetOutput = {
+    text: string;
+    title: string;
+    author: string;
+    videoId?: string;
   };
 }
