@@ -20,7 +20,7 @@ const handleSubmit = async () => {
     alert("URL inválida");
     return;
   }
-  const { data } = await useFetch("/api/lyrics", {
+  const { data } = await useFetch("/api/music", {
     params: {
       url: url.value,
     },
@@ -29,6 +29,8 @@ const handleSubmit = async () => {
   Builder.load({
     ...data.value,
     lyrics: data.value.lyricsText,
+    chordPlainText: data.value.chordsText,
+    chords: data.value.chords,
     previewUrl: `http://www.youtube.com/embed/${data.value.videoId}`,
   });
   showResults.value = true;

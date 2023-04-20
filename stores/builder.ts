@@ -3,7 +3,8 @@ type State = {
   title: string;
   artist: string;
   lyricsUrl: string;
-  chords: string;
+  chords: string[];
+  chordPlainText: string;
   chordsUrl: string;
   previewUrl: string;
 };
@@ -14,7 +15,8 @@ export class Builder {
     title: "",
     artist: "",
     lyricsUrl: "",
-    chords: "",
+    chordPlainText: "",
+    chords: [],
     chordsUrl: "",
     previewUrl: "",
   });
@@ -29,6 +31,7 @@ export class Builder {
     Builder.state.value.artist = data.artist;
     Builder.state.value.lyricsUrl = data.lyricsUrl;
     Builder.state.value.chords = data.chords;
+    Builder.state.value.chordPlainText = data.chordPlainText;
     Builder.state.value.chordsUrl = data.chordsUrl;
     Builder.state.value.previewUrl = data.previewUrl;
   }

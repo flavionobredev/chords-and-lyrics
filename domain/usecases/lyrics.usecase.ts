@@ -1,13 +1,5 @@
 import { Scrapper } from "../gateways/protocol/scrapper.protocol";
 
-export namespace LyricsStrategy {
-  export type GetOutput = {
-    text: string;
-    title: string;
-    author: string;
-  };
-}
-
 export interface LyricsStrategy {
   get(lyrics: Scrapper.ScrappingOutput, data: unknown): unknown;
 }

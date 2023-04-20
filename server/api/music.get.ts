@@ -1,5 +1,7 @@
-import { LetrasMusScrapper } from "~/domain/gateways/letter-scrapper.gateway";
+import { GeneralScrapper } from "~/domain/gateways/letter-scrapper.gateway";
+import { CifraClubStrategy } from "~/domain/strategies/cifra-club.strategy";
 import { LetrasMusStrategy } from "~/domain/strategies/letras-mus.strategy";
+import { Chords } from "~/domain/usecases/chords.usecase";
 import { Lyrics } from "~/domain/usecases/lyrics.usecase";
 const acceptedHosts = process.env.ACCEPTED_HOSTS?.split(",") || [];
 export default defineEventHandler(async (event) => {
@@ -24,16 +26,32 @@ export default defineEventHandler(async (event) => {
 
   console.log("event>>>>", urlData.host);
   const letrasMusStrategy = new Lyrics(
-    new LetrasMusScrapper(fetch),
+    new GeneralScrapper(fetch),
     new LetrasMusStrategy()
   );
-  const result = await letrasMusStrategy.get<LetrasMusStrategy.GetOutput>(
-    urlData.href,
-    {
-      lyricsSelector: ".cnt-letra",
-    }
+
+  const cifraClubStrategy = new Chords(
+    new GeneralScrapper(fetch),
+    new CifraClubStrategy()
   );
+
+  let result = await letrasMusStrategy.get<
+    LetrasMusStrategy.GetOutput & CifraClubStrategy.GetOutput
+  >(urlData.href, {
+    lyricsSelector: ".cnt-letra",
+  });
   console.log("result>>>>", result);
+  if (result.cifraUrl) {
+    const resultCifra =
+      await cifraClubStrategy.get<CifraClubStrategy.GetOutput>(
+        result.cifraUrl,
+        {
+          chordsSelector: "pre",
+        }
+      );
+    result.chordPlainText = resultCifra.chordPlainText;
+    result.chords = resultCifra.chords;
+  }
   // const data = await fetch(urlData).then((res) => res.text());
   return {
     ok: true,
@@ -41,5 +59,7 @@ export default defineEventHandler(async (event) => {
     title: result.title,
     author: result.author,
     videoId: result.videoId,
+    chordsText: result.chordPlainText,
+    chords: result.chords,
   };
 });

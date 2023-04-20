@@ -2,7 +2,7 @@ import { HttpClient } from "./protocol/http-client.protocol";
 import { Scrapper } from "./protocol/scrapper.protocol";
 import { JSDOM } from "jsdom";
 
-export class LetrasMusScrapper implements Scrapper {
+export class GeneralScrapper implements Scrapper {
   constructor(private readonly gateway: HttpClient) {}
 
   async scrap(url: string) {

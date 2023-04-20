@@ -20,11 +20,16 @@ export class LetrasMusStrategy implements LyricsStrategy {
     );
     const info = matchInfo && JSON.parse(matchInfo[1]);
 
+    const cifraUrl = html.window.document.querySelector<HTMLLinkElement>(
+      "a[data-action='Nav Cifra']"
+    )?.href;
+
     return {
       text: this.parseLyrics(lyrics),
       title: info?.["Name"] || "Título Desconhecido",
       author: info?.["Artist"] || "Artista Desconhecido",
       videoId: info?.["YoutubeID"],
+      cifraUrl: cifraUrl,
     };
   }
 
@@ -47,5 +52,6 @@ export namespace LetrasMusStrategy {
     title: string;
     author: string;
     videoId?: string;
+    cifraUrl?: string;
   };
 }
