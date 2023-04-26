@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/usr/notion-integration/app
+    entrypoint: sh -c "npm i && npm run dev"
+    tty: true # for pretty logs
+    ports:
+      - "8000:5173"
+      - "9000:9000"
+    environment:
+      PORT: 8000
+      ACCEPTED_HOSTS: ${ACCEPTED_HOSTS}

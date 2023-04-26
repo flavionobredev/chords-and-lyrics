@@ -1,0 +1,11 @@
+FROM node:16-alpine
+
+WORKDIR /usr/notion-integration/app
+
+COPY package*.json ./
+
+RUN npm install && chown -R node:node /root
+
+COPY . .
+
+EXPOSE 5173 9000
