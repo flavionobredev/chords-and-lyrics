@@ -1,14 +1,4 @@
-<script setup lang="ts">
-import axios from "axios";
-import { onMounted } from "vue";
-import { RouterLink, RouterView } from "vue-router";
-import { api } from "./api";
-onMounted(() => {
-  api
-    .get("/get-music")
-    .then(console.log);
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <RouterView />
