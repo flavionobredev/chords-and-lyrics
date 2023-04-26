@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from "vue-router";
 import { api } from "./api";
 onMounted(() => {
   api
-    .get("http://localhost:9000/.netlify/functions/get-music")
+    .get("/get-music")
     .then(console.log);
 });
 </script>

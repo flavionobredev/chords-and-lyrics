@@ -15,3 +15,4 @@ services:
     environment:
       PORT: 8000
       ACCEPTED_HOSTS: ${ACCEPTED_HOSTS}
+      FUNCTIONS_PORT: ${FUNCTIONS_PORT}
