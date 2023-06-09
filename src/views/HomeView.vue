@@ -2,9 +2,10 @@
 import { onMounted, ref } from "vue";
 import { Builder } from "../stores/builder";
 import { api } from "@/api";
+// import { NotionAPI } from "@/api/notion";
 
-import Lyrics from "../components/lyrics.vue";
-import Chords from "../components/chords.vue";
+// import Lyrics from "../components/lyrics.vue";
+// import Chords from "../components/chords.vue";
 
 // const letrasMusStrategy = new Lyrics(
 // new GeneralScrapper(fetch),
@@ -18,7 +19,7 @@ const url = ref(
 const text = ref("");
 const showResults = ref(false);
 
-onMounted(() => {
+onMounted(async () => {
   textAreaRef.value.focus();
 });
 

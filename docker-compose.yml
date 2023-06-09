@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
@@ -16,3 +16,4 @@ services:
       PORT: 8000
       ACCEPTED_HOSTS: ${ACCEPTED_HOSTS}
       FUNCTIONS_PORT: ${FUNCTIONS_PORT}
+      VITE_MUSIC_API_KEY: ${VITE_MUSIC_API_KEY}
