@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Builder } from "../stores/builder";
+// import { Builder } from "../stores/builder";
 import { api } from "@/api";
 // import { NotionAPI } from "@/api/notion";
 
@@ -50,7 +50,7 @@ const handleSubmit = async () => {
 
 <template>
   <main class="home">
-    <div class="h-full px-4">
+    <!-- <div class="h-full px-4">
       <div
         class="transition-all duration-300 flex flex-col justify-center items-center text-center"
         :class="{ 'h-[300px]': showResults, 'h-screen': !showResults }"
@@ -85,7 +85,7 @@ const handleSubmit = async () => {
           ></iframe>
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 

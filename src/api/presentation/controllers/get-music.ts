@@ -1,3 +1,4 @@
+import type { GetMusic } from "@/api/domain/usecases/music.usecase";
 import type { Controller } from "../protocols/controller";
 
 export class GetMusicController implements Controller {
@@ -9,4 +10,6 @@ export class GetMusicController implements Controller {
             body: music,
         };
     }
+
+    constructor(private readonly getMusic: GetMusic) {}
 }

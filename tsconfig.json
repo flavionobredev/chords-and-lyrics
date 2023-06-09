@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "allowJs": false,
+    "lib": ["ES2019"]
   },
 
   "references": [

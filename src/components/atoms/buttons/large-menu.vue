@@ -1,12 +1,4 @@
-<script setup lang="ts">
-import { defineProps } from "vue";
-defineProps({
-  text: {
-    type: String,
-    required: true,
-  },
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <button class="button non-select">

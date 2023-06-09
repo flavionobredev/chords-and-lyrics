@@ -1,14 +1,7 @@
 <script setup lang="ts">
-import { NotionAPI } from "@/api/notion";
 import { MusicalNoteIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
-import { onBeforeMount } from "vue";
 import LargeMenu from "../components/atoms/buttons/large-menu.vue";
 
-const notion = new NotionAPI();
-
-onBeforeMount(async () => {
-  const result = await notion.getDatabase("b099777bbe5d48d3a356f1716ebb00d4");
-});
 </script>
 <template>
   <main class="h-[500px]">

@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { Builder } from "../stores/builder";
 </script>
 
@@ -11,4 +11,4 @@ import { Builder } from "../stores/builder";
       v-model="Builder.data.chordPlainText"
     />
   </div>
-</template>
+</template> -->

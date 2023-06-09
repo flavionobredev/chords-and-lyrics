@@ -6,14 +6,14 @@ import { onBeforeMount, ref } from "vue";
 const notion = new NotionAPI();
 const result = ref<any>(null);
 const musics = ref<any[]>([]);
-const properties = ref<any[]>([]);
+const properties = ref<{ [key: string]: any }>({});
 
 onBeforeMount(async () => {
   const id = "b099777bbe5d48d3a356f1716ebb00d4";
   const database = await notion.getDatabase(id);
   console.log(database);
 
-  properties.value = Object.fromEntries(
+  properties.value = Object.fromEntries<any>(
     Object.entries(database.properties).sort((a, b) => {
       // Verificar se a chave é "Name" (id=title)
       if (a[0] === "Name") {
