@@ -1,7 +1,6 @@
 import axios from "axios";
 export const createClient = (resource: string = "") => {
-  const baseUrl =
-    import.meta.env.NODE_ENV === "production" ? "" : "http://localhost:9000";
+  const baseUrl = import.meta.env.PROD ? "" : "http://localhost:9000";
   console.log(import.meta.env);
 
   return axios.create({
