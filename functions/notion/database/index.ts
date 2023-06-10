@@ -3,7 +3,6 @@ import { GetById } from "./get";
 import { Query } from "./query";
 
 export const handler: Handler = async (event, context) => {
-  console.log("cheguei? :::::::");
   event.headers["Access-Control-Allow-Origin"] = "*";
   event.headers["Access-Control-Allow-Headers"] = "*";
   event.headers["Access-Control-Allow-Methods"] = "*";
@@ -39,10 +38,8 @@ export const handler: Handler = async (event, context) => {
     /.*\/notion\/database$/.test(event.path) &&
     event.queryStringParameters?.action === "query"
   ) {
-    console.log("to aqui????");
     const body = JSON.parse(event.body || "{}");
     const data = await Query(event.queryStringParameters?.id, body);
-    console.log("data :::::::::", data);
     return {
       statusCode: 200,
       headers: {
