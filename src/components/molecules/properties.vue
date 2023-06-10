@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
-import Title from "../atoms/music/properties/title.vue";
+import Title, {
+  type Title as TitleType,
+} from "../atoms/music/properties/title.vue";
 
 type MultiSelectProps = {
   id: string;
@@ -35,7 +37,7 @@ defineProps({
       </li>
     </ul>
     <ul v-if="property.id === 'title'" class="list-none">
-      <Title :property="property" />
+      <Title :property="(property as unknown as TitleType)" />
     </ul>
   </div>
 </template>

@@ -9,7 +9,7 @@ type TitleProps = {
   plain_text: string;
 };
 
-type Title = NotionBaseObject & {
+export type Title = NotionBaseObject & {
   id: string;
   type: "title";
   title: TitleProps[];
