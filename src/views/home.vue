@@ -6,12 +6,12 @@ import LargeMenu from "../components/atoms/buttons/large-menu.vue";
 <template>
   <main class="h-[500px]">
     <section class="h-full flex justify-center items-center">
-      <div class="flex">
-        <LargeMenu class="mr-4">
+      <div class="flex flex-wrap">
+        <LargeMenu class="mb-4 md:mb-0 md:mr-4 w-full md:w-auto">
           <PencilSquareIcon class="h-9 w-9 mb-2"></PencilSquareIcon>
           <p class="">Montar Repertório</p>
         </LargeMenu>
-        <LargeMenu @click="$router.push({ name: 'musics' })">
+        <LargeMenu class="w-full md:w-auto" @click="$router.push({ name: 'musics' })">
           <MusicalNoteIcon class="h-9 w-9 mb-2"></MusicalNoteIcon>
           <p class="">Todas as Músicas</p>
         </LargeMenu>

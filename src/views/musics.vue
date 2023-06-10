@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NotionAPI } from "@/api/notion";
+import Properties from "@/components/molecules/properties.vue";
 import { NotionStore } from "@/stores/notion";
 import { onBeforeMount, ref } from "vue";
 
@@ -34,18 +35,18 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div>
-    <h1>Musics</h1>
-    <table class="table-auto">
+  <div class="flex justify-center mt-12">
+    <table class="table-row min-w-[200px] overflow-x-auto">
       <thead>
         <tr>
-          <th v-for="property in properties">{{ property.name }}</th>
+          <th class="px-2 text-left" v-for="property in properties">{{ property.name }}</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="music in musics">
-          <td v-for="property in properties">
-            {{ music.properties[property.name] }}
+          <td class="min-w-[260px] md:min-w-full max-w-xs p-2 border-b-[1px] border-[#ffffff30]" v-for="property in properties">
+            <!-- {{ music.properties[property.name] }} -->
+            <Properties :property="music.properties[property.name]" />
           </td>
         </tr>
       </tbody>

@@ -19,6 +19,7 @@ import Logo from "./components/atoms/logo.vue";
 
 <style scoped>
 .content {
+  @apply px-6;
   min-height: 100svh;
 }
 </style>

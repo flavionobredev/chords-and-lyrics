@@ -7,7 +7,6 @@ export const handler: Handler = async (event, context) => {
   // );
 
   const url = event.queryStringParameters?.url;
-  console.log(url);
   return {
     statusCode: 200,
     headers: {
