@@ -1,9 +1,0 @@
-[[headers]]
-  for="/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-[functions]
-  directory = "functions/"
-  node_bundler = "esbuild"
-[dev]
-  functionsPort=9000
