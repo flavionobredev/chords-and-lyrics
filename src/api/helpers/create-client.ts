@@ -1,8 +1,7 @@
 import axios from "axios";
-export const createClient = (resource: string = "") => {
-  const baseUrl = import.meta.env.PROD ? "" : "http://localhost:9000";
+export const createClient = (data?: any) => {
   return axios.create({
-    baseURL: `${baseUrl}/.netlify/functions/${resource}`,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
       "Content-Type": "application/json",
     },
