@@ -10,10 +10,7 @@ const musics = ref<any[]>([]);
 const properties = ref<{ [key: string]: any }>({});
 
 onBeforeMount(async () => {
-  const id = "b099777bbe5d48d3a356f1716ebb00d4";
-  const database = await notion.getDatabase(id);
-  console.log(database);
-
+  const database = await notion.getDatabase();
   properties.value = Object.fromEntries<any>(
     Object.entries(database.properties).sort((a, b) => {
       // Verificar se a chave é "Name" (id=title)
@@ -22,14 +19,11 @@ onBeforeMount(async () => {
       } else if (b[0] === "Name") {
         return 1; // Move "Name" para o início
       }
-
       return 0; // Mantém a ordem original para outras propriedades
     })
   );
 
-  console.log(properties.value);
-
-  result.value = await notion.getMusics(id);
+  result.value = await notion.getMusics();
   musics.value = result.value?.results as any[];
 });
 </script>
@@ -39,12 +33,17 @@ onBeforeMount(async () => {
     <table class="table-row min-w-[200px] overflow-x-auto">
       <thead>
         <tr>
-          <th class="px-2 text-left" v-for="property in properties">{{ property.name }}</th>
+          <th class="px-2 text-left" v-for="property in properties">
+            {{ property.name }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="music in musics">
-          <td class="min-w-[260px] md:min-w-full max-w-xs p-2 border-b-[1px] border-[#ffffff30]" v-for="property in properties">
+          <td
+            class="min-w-[260px] md:min-w-full max-w-xs p-2 border-b-[1px] border-[#ffffff30]"
+            v-for="property in properties"
+          >
             <!-- {{ music.properties[property.name] }} -->
             <Properties :property="music.properties[property.name]" />
           </td>
