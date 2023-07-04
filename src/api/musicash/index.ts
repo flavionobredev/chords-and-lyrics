@@ -1,11 +1,12 @@
 import axios from "axios";
-export const createClient = (data?: any) => {
+export const MusicashClient = (data?: any) => {
   return axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
       "Content-Type": "application/json",
     },
+    timeout: 2500,
   });
 };
 
-export type Client = ReturnType<typeof createClient>;
+export type MusicashClient = ReturnType<typeof MusicashClient>;
