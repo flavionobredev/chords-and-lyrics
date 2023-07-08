@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { NotionAPI } from "@/api/notion";
+import SimplePagination from "@/components/atoms/pagination/simple-pagination.vue";
 import Properties from "@/components/molecules/properties.vue";
 import { NotionStore } from "@/stores/notion";
-import { onBeforeMount, ref } from "vue";
+import { nextTick, onBeforeMount, reactive, ref } from "vue";
 
 const notion = new NotionAPI();
-const result = ref<any>(null);
+const result = reactive<any>({});
+const isFirstLoading = ref<boolean>(true);
+const isLoadMoreLoading = ref<boolean>(false);
 const musics = ref<any[]>([]);
 const properties = ref<{ [key: string]: any }>({});
 
@@ -25,11 +28,22 @@ onBeforeMount(async () => {
 
   result.value = await notion.getMusics();
   musics.value = result.value?.results as any[];
+  isFirstLoading.value = false;
 });
+
+const loadMore = async () => {
+  isLoadMoreLoading.value = true;
+  result.value = await notion.getMusics(result.value.next_cursor);
+  musics.value = [...musics.value, ...result.value.results];
+  isLoadMoreLoading.value = false;
+};
 </script>
 
 <template>
-  <div class="flex justify-center mt-12">
+  <div v-if="isFirstLoading">
+    <p>Carregando...</p>
+  </div>
+  <div v-else class="flex flex-col justify-center mt-12">
     <table class="table-row min-w-[200px] overflow-x-auto">
       <thead>
         <tr>
@@ -50,6 +64,12 @@ onBeforeMount(async () => {
         </tr>
       </tbody>
     </table>
+    <!-- {{ result.has_more }} -->
+    <SimplePagination
+      @page-change="loadMore"
+      :hasMore="result.value.has_more"
+      :isLoading="isLoadMoreLoading"
+    />
     <!-- <div v-for="music in musics">
       {{ music }}
     </div> -->

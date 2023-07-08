@@ -5,7 +5,7 @@ export const MusicashClient = (data?: any) => {
     headers: {
       "Content-Type": "application/json",
     },
-    timeout: 2500,
+    // timeout: 2500,
   });
 };
 
