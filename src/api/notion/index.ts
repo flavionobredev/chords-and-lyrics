@@ -18,10 +18,11 @@ export class NotionAPI {
     return response.data;
   }
 
-  public async getMusics(options?: any) {
+  public async getMusics(nextCursor?: string) {
     const response = await this.client.get(`/musics`, {
       params: {
-        size: 10,
+        page_size: 13,
+        start_cursor: nextCursor,
       },
     });
     return response.data;
