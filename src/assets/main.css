@@ -29,8 +29,6 @@ body {
 .non-select {
   user-select: none;
 }
-<<<<<<< HEAD
-=======
 
 .spinner {
   width: 40px;
@@ -70,4 +68,3 @@ body {
     transform: translateY(0);
   }
 }
->>>>>>> develop
